@@ -22,9 +22,12 @@ def seed_tables():
             email="admin@email.com",
             password=bcrypt.generate_password_hash("123456").decode("utf-8"),
             is_admin=True,
+            waist_measurement="189",
+            bust_measurement="345",
+            hip_measurement="456",
         ),
     ]
-    
+
     db.session.add_all(users)
 
     db.session.commit()

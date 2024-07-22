@@ -9,10 +9,13 @@ class User(db.Model):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+    waist_measurement = db.Column(db.String)
+    bust_measurement = db.Column(db.String)
+    hip_measurement = db.Column(db.String)
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ("id", "name", "email", "password","is_admin")
+        fields = ("id", "name", "email", "password","is_admin","waist_measurement","bust_measurement","hip_measurement")
 
 user_schema = UserSchema(exclude=["password"])
 
