@@ -1,10 +1,9 @@
+from marshmallow import fields
 from init import db, ma 
 
 class User(db.Model):
-    # table name
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
-    # table attributes
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     email = db.Column(db.String, nullable=False, unique=True)
