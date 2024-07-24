@@ -2,6 +2,9 @@ from flask import Blueprint
 
 from init import db, bcrypt 
 from models.user import User
+#from models.retailer import Retailer
+#from models.retailer import SizeChart
+from models.retailer import Size
 
 db_commands = Blueprint("db",__name__)
 
@@ -19,7 +22,7 @@ def drop_tables():
 def seed_tables():
     users = [
         User(
-            email="admin@email.com",
+            email="new@email.com",
             password=bcrypt.generate_password_hash("123456").decode("utf-8"),
             is_admin=True,
             waist_measurement="189",
