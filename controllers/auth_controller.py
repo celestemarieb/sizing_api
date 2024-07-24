@@ -6,6 +6,7 @@ from psycopg2 import errorcodes
 from flask_jwt_extended import create_access_token
 
 from models.user import User, user_schema
+from models.retailer import Size, size_schema
 from init import bcrypt, db
 
 auth_bp = Blueprint("auth", __name__,url_prefix="/auth")
@@ -51,3 +52,4 @@ def login_user():
 
 
 # delete 
+

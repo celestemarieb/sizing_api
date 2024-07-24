@@ -7,69 +7,67 @@ class Size(db.Model):
     # primary key 
     id = db.Column(db.Integer, primary_key=True)
 
-    # foreign key 
-    #sizechart_id = db.Column(db.Integer, db.ForeignKey("size_charts.id"))
-
     # attributes 
     name = db.Column(db.String)
     bust_measurement = db.Column(db.String)
     waist_measurement = db.Column(db.String)
     hip_measurement = db.Column(db.String)
+    
+    # foreign key 
+    sizechart_id = db.Column(db.Integer, db.ForeignKey("size_charts.id"))
 
     # relationships 
-    #size_charts = db.relationship("SizeChart",back_populates ="sizes")
+    size_chart = db.relationship("SizeChart",back_populates ="sizes")
 
 class SizeSchema(ma.Schema):
     class Meta:
-        fields = ("id","name","bust_measurement","waist_measurement","hip_measurement")
+        fields = ("id","name","bust_measurement","waist_measurement","hip_measurement","sizechart_id")
 
 size_schema = SizeSchema()
 sizes_schema = SizeSchema(many=True)
 
 
-#class SizeChart(db.Model):
-    #__tablename__ = "size_charts"
+class SizeChart(db.Model):
+    __tablename__ = "size_charts"
 
     # primary key 
-    #id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
 
     # foreign key 
-    #size_id = db.Column(db.Integer,db.ForeignKey("sizes.id"))
+    retailer_id = db.Column(db.Integer,db.ForeignKey("retailers.id"))
 
     #relationships 
-    #sizes = db.relationship("Size",back_populates="size_chart",lazy="dynamic")
+    sizes = db.relationship("Size",back_populates="size_chart",lazy="dynamic")
+    retailers = db.relationship("Retailer",back_populates="size_chart") 
 
 
-#class SizeChartSchema(ma.Schema):
-    #class Meta:
-        #fields = ("id","size_id")
+class SizeChartSchema(ma.Schema):
+    class Meta:
+        fields = ("id","retailer_id")
 
-#sizechart_schema = SizeChartSchema()
-#sizecharts_schema = SizeChartSchema(many=True)
+sizechart_schema = SizeChartSchema()
+sizecharts_schema = SizeChartSchema(many=True)
 
-#class Retailer(db.Model):
-    #__tablename__ = "retailers"
+class Retailer(db.Model):
+    __tablename__ = "retailers"
 
     # primary key  
-    #id = db.Column(db.Integer, primary_key=True)
-
-    # foreign key 
-    #sizechart_id = db.Column(db.Integer,db.ForeignKey("size_charts.id"))
+    id = db.Column(db.Integer, primary_key=True)
 
     # attributes 
-    #name = db.Column(db.String(80), unique=True, nullable=False)
-    #date = db.Column(db.Date)
+    name = db.Column(db.String(80), unique=True, nullable=False)
+    date = db.Column(db.Date)
     
 
     # relationships 
-    #sizechart = db.relationship("SizeChart",back_populates="retailer",lazy="dynamic")
+    size_chart = db.relationship("SizeChart",back_populates="retailers")
 
-#class RetailerSchema(ma.Schema):
-    #class Meta:
-        #fields = ("id","name","date","sizechart_id")
+class RetailerSchema(ma.Schema):
+    class Meta:
+        fields = ("id","name","date")
 
-#retailer_schema = RetailerSchema()
-#retailers_schema = RetailerSchema(many=True)
+retailer_schema = RetailerSchema()
+retailers_schema = RetailerSchema(many=True)
 
 
 
