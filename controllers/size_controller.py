@@ -41,12 +41,15 @@ def create_size():
     #return size_schema.dump(size_list)
 
 # delete 
-#@size_bp.route("/delete",methods=["DELETE"])
-#def delete_size():
-    # find matching size in database
-    #db.session.delete(size)
-    #db.session.commit()
-    #return size_schema.dump(size), 201 
+@size_bp.route("/delete",methods=["DELETE"])
+def delete_size():
+    size_fields = size_schema.load(request.json)
+    new_size = Size()
+    new_size.id = size_fields["id"]
+    size = db.session.execute(db.select(Size).filter_by(id=new_size.id))
+    db.session.delete(size)
+    db.session.commit()
+    return size_schema.dump(sizes), 201 
 
 
 
