@@ -25,10 +25,7 @@ def create_app():
     from controllers.size_controller import size_bp
     app.register_blueprint(size_bp)
 
-    from controllers.sizechart_controller import sizechart_bp
-    app.register_blueprint(sizechart_bp)
-
-    from controllers.retailer_controller import retailer_bp
-    app.register_blueprint(retailer_bp)
+    from controllers.fit_controller import fit_bp
+    app.register_blueprint(fit_bp)
 
     return app 
