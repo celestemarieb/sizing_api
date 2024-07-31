@@ -10,12 +10,13 @@ from sqlalchemy import select
 from models.retailer import Size, size_schema
 from models.retailer import SizeChart, SizeChartSchema
 from models.retailer import Retailer, retailer_schema
-from models.retailer import User, user_schema
+from models.user import User, user_schema
 from init import bcrypt, db
 
-fit_bp = Blueprint("fit", __name__,url_prefix="/find")
+fit_bp = Blueprint("fit", __name__,url_prefix="/fit")
 
-# find a good fit 
+# GET /fit/find - Find A Good Fit (a size which matches the users dimensions) (7)
+@fit_bp.route("/find", methods=["POST"])
 def find_fit():
     #user_id = user_schema.load(request.json)
 
@@ -25,4 +26,4 @@ def find_fit():
     # return the size id, name, size chart and retailer 
     # return error message if no match found 
 
-    return size_schema.dump(new_size), 201
+    return {"message": "Placeholder"}, 200

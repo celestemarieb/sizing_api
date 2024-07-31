@@ -11,6 +11,7 @@ from init import bcrypt, db
 
 auth_bp = Blueprint("auth", __name__,url_prefix="/auth")
 
+#  POST /auth/register - Create a New User (1)
 @auth_bp.route("/register", methods=["POST"])
 def register_user():
     try:
@@ -38,7 +39,8 @@ def register_user():
             return{"error":f"The column {err.orig.diag.column_name} is required"}, 409
         if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
             return{"error": "Email address already in use"}, 409
-        
+
+#  POST /auth/login - Login as an Existing User (2)
 @auth_bp.route("/login",methods=["POST"])
 def login_user():
     body_data = request.get_json()

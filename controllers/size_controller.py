@@ -14,7 +14,7 @@ from init import bcrypt, db
 
 size_bp = Blueprint("sizes", __name__,url_prefix="/sizes")
 
-# create 
+# POST /sizes/new - Create a New Size (3)
 @size_bp.route("/new", methods=["POST"])
 def create_size():
     size_fields = size_schema.load(request.json)
@@ -31,16 +31,12 @@ def create_size():
 
     return size_schema.dump(new_size), 201
 
-# update 
-#@size_bp.route("/update", methods=["PATCH"])
+# PUT /sizes/update - Update a Size (4)
+@size_bp.route("/update", methods=["PATCH"])
+def update_size():
+    return {"message": "Placeholder"}, 200
 
-# read 
-#@size_bp.route("/getall",methods=["GET"])
-#def get_sizes():
-    #size_list = db.session.scalars(select(Size).order_by(Size.id)).all()
-    #return size_schema.dump(size_list)
-
-# delete 
+# DELETE /sizes/delete - Delete a Size (5)
 @size_bp.route("/delete",methods=["DELETE"])
 def delete_size():
     size_fields = size_schema.load(request.json)
@@ -52,6 +48,12 @@ def delete_size():
     db.session.commit()
 
     return {"message": "Size deleted"}, 200
+
+# GET /sizes/all - Display All Sizes (6)
+@size_bp.route("/getall",methods=["GET"])
+def get_sizes():
+    size_list = db.session.scalars(select(Size).order_by(Size.id)).all()
+    return size_schema.dump(size_list)
 
 
 
