@@ -243,8 +243,13 @@ Request:
 POST /auth/register 
 
 {
-    "name":"user's name"
-    "email":"user's email address"
+	"name": "User 1",
+	"email": "user@email.com",
+	"password": "123456",
+    "is_admin":"true",
+    "waist_measurement":"100",
+    "hip_measurement":"100",
+    "bust_measurement":"100"
 }
 ...
 Response:
@@ -254,7 +259,6 @@ HTTP/1.1 201 Created
     "id":1,
     "name": "user's name"
     "email": "user's email address"
-    "password": "user's password"
 }
 ...
 
@@ -282,20 +286,30 @@ Request:
 ...
 POST /sizes/new 
 {
-
+	"name":"XS",
+	"bust_measurement":"123",
+	"waist_measurement":"456",
+	"hip_measurement":"789",
+	"sizechart_id":"123"
 }
 ...
 Response:
 ...
+201 Created 
 {
-
+	"bust_measurement": "123",
+	"hip_measurement": "789",
+	"id": 4,
+	"name": "XS",
+	"sizechart_id": 123,
+	"waist_measurement": "456"
 }
 ...
 
 - Update a Size (4)
 Request:
     ...
-    PUT /sizes/update 
+    PATCH /sizes/update 
     {
         "id":"size id"
         "name":"Updated Name"
@@ -331,10 +345,23 @@ Response:
 - Display All Sizes (6)
 Request:
     ...
-    GET /sizes/all 
+    GET /sizes 
     ...
 Response:
     ...
+    HTTP/1.1 200 OK
+    [
+        {
+            "id":1
+            "name":"Size Name"
+            "":""
+        },
+        {
+            "id":2
+            "name":"Another Size Name" 
+            "":""
+        }
+    ]
     ...
 - Find A Good Fit (a size which matches the users dimensions) (7)
 Request:

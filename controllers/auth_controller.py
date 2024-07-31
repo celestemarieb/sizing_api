@@ -17,7 +17,11 @@ def register_user():
         body_data = request.get_json()
         user = User(
             name=body_data.get("name"),
-            email=body_data.get("email")
+            email=body_data.get("email"),
+            is_admin=body_data.get("is_admin"),
+            waist_measurement=body_data.get("waist_measurement"),
+            hip_measurement=body_data.get("hip_measurement"),
+            bust_measurement=body_data.get("bust_measurement")
         )
 
         password = body_data.get("password")
