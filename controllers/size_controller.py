@@ -47,9 +47,11 @@ def delete_size():
     new_size = Size()
     new_size.id = size_fields["id"]
     size = db.session.execute(db.select(Size).filter_by(id=new_size.id))
+
     db.session.delete(size)
     db.session.commit()
-    return size_schema.dump(sizes), 201 
+
+    return {"message": "Size deleted"}, 200
 
 
 

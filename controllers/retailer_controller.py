@@ -13,7 +13,7 @@ from models.retailer import SizeChart, SizeChartSchema
 from models.retailer import Retailer, retailer_schema
 from init import bcrypt, db
 
-retailer_bp = Blueprint("retailer", __name__,url_prefix="/retailer")
+retailer_bp = Blueprint("retailer", __name__,url_prefix="/retailers")
 
 # create 
 

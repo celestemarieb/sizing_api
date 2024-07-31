@@ -1,5 +1,5 @@
-from init import db, ma 
 from marshmallow import fields
+from init import db, ma 
 
 class Size(db.Model):
     __tablename__ = "sizes"
@@ -9,9 +9,9 @@ class Size(db.Model):
 
     # attributes 
     name = db.Column(db.String)
-    bust_measurement = db.Column(db.String)
     waist_measurement = db.Column(db.String)
     hip_measurement = db.Column(db.String)
+    bust_measurement = db.Column(db.String)
     
     # foreign key 
     sizechart_id = db.Column(db.Integer, db.ForeignKey("size_charts.id"))
@@ -21,7 +21,7 @@ class Size(db.Model):
 
 class SizeSchema(ma.Schema):
     class Meta:
-        fields = ("id","name","bust_measurement","waist_measurement","hip_measurement","sizechart_id")
+        fields = ("id","name","waist_measurement","hip_measurement","bust_measurement","sizechart_id")
 
 size_schema = SizeSchema()
 sizes_schema = SizeSchema(many=True)
