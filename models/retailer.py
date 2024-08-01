@@ -1,4 +1,4 @@
-from marshmallow import fields
+from marshmallow import Schema,fields
 from init import db, ma 
 
 class Size(db.Model):
@@ -58,7 +58,6 @@ class Retailer(db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
     date = db.Column(db.Date)
     
-
     # relationships 
     size_chart = db.relationship("SizeChart",back_populates="retailers")
 
